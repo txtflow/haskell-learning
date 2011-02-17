@@ -21,7 +21,11 @@ subList 0 _ = []
 subList n (x:xs) = x : subList (n-1) xs
 
 --1.4
+fibonacciList = map (fibonacci) [1..]
 
+fibonacci 0 = 1
+fibonacci 1 = 1
+fibonacci n = fibonacci(n-2) + fibonacci(n-1)
 
 --1.5
 getN :: (Num n) => n->[a]->a
@@ -29,7 +33,11 @@ getN :: (Num n) => n->[a]->a
 getN 1 (x:xs) = x
 getN n (x:xs) = getN (n-1) xs
 
-
-
-
+--1.6
+atomPosition :: (Num n, Eq a) => a->[a]->n
+atomPosition a l = atomPosition' a l 1
+                   where atomPosition' a l n | l == [] = 0 
+                                             | a == head l = n            
+                                             | otherwise = atomPosition' a (tail l) (n+1)  
+                         
 
