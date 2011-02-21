@@ -40,4 +40,12 @@ atomPosition a l = atomPosition' a l 1
                                              | a == head l = n            
                                              | otherwise = atomPosition' a (tail l) (n+1)  
                          
+                         
+atomInsert :: Num n => n->b->[b]->[b]
+atomInsert 1 e l = e : l            
+atomInsert n e (l:ls) = l : atomInsert (n-1) e ls            
+                         
 
+--atomlnsert :: Num a=>b->[b]->a->[b]
+--atomlnsert a l 1 = (a:l)
+--atomlnsert a (x:xs) n = x : atomlnsert a xs (n-1)
