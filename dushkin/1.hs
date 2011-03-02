@@ -49,3 +49,4 @@ atomInsert n e (l:ls) = l : atomInsert (n-1) e ls
 --atomlnsert :: Num a=>b->[b]->a->[b]
 --atomlnsert a l 1 = (a:l)
 --atomlnsert a (x:xs) n = x : atomlnsert a xs (n-1)
+
