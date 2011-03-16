@@ -1,6 +1,7 @@
 module Main where
 
 import System.Environment(getArgs)
+import Data.Maybe    
 
 interactWith :: (String -> String) -> FilePath -> FilePath -> IO ()
 interactWith fun inputFile outputFile = do
@@ -35,4 +36,30 @@ splitLines cs =
 
 isLineTerminator :: Char -> Bool
 isLineTerminator c = c == '\r' || c == '\n'    
-               
+
+--exercises 1
+--1
+safeHead :: [a] -> Maybe a
+safeHead []    = Nothing                     
+safeHead (x:_) = Just x
+
+safeTail :: [a] -> Maybe [a]
+safeTail []     = Nothing                     
+safeTail (_:xs) = Just xs
+
+safeLast    :: [a] -> Maybe a
+safeLast []     = Nothing
+safeLast [x]    = Just x                  
+sefeLast (_:xs) = safeLast xs
+
+safeInit :: [a] -> Maybe [a]
+safeInit []     = Nothing
+safeInit [_]    = Just []              
+safeInit (x:xs) = Just (x:(fromMaybe [] (safeInit xs)))              
+              
+--2
+splitWith :: (a -> Bool) -> [a] -> [[a]]
+splitWith _ []  = []
+splitWith fun l = let (x,xs) = break fun l
+                      in x:(splitWith fun xs)
+                 
