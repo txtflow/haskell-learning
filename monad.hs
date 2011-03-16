@@ -1,3 +1,5 @@
+module Monad where
+
 import Data.Monoid
 import Data.Foldable
 import Control.Monad.Writer
@@ -15,5 +17,3 @@ factl n = do
     ++ " and " ++ show m ++ "\n"
   return r
 
-
-  

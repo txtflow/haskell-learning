@@ -1,3 +1,3 @@
 instance Eq Iiii where
-  x == y = x `integerEq` y
-  
+  x == y = x `integerEq`
+
