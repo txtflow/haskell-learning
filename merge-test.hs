@@ -1,4 +1,4 @@
-module Main where
+module Main123 where
 
 import System.Environment(getArgs)
 
