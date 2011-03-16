@@ -32,6 +32,8 @@ fermat_p_up n = fermat_p_acc n 0
 fermat_p_f n = foldl (+) 0 (take n fermat_list)
 
 getN :: (Num n) => n->[a]->a
+getN n [] = error "empty list"
+getN n (x:xs)  
 --getN 1 (x:xs) = x
 --getN n (x:xs) = getN (n-1) xs
 
@@ -59,3 +61,7 @@ getLowerSymbolsCount str = foldl (aggregate) 0 str
                                                    else s     
                                                         
 --2.5                                                        
+
+
+    
+    

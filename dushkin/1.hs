@@ -1,5 +1,5 @@
 --1.1
-fermat_t :: (Num n, Enum n) => n->n
+fermat_t   :: (Num n, Enum n) => n->n
 fermat_t 0 = 0
 fermat_t n = n + fermat_t (n-1)
 
@@ -7,6 +7,7 @@ fermat_t n = n + fermat_t (n-1)
 --1.2
 fermat_p :: (Num n, Enum n) => n->n
 fermat_p 0 = 0
+
 fermat_p n = fermat_t(n) + fermat_p(n-1)
 
 
@@ -17,7 +18,7 @@ fac :: Num n => n->n
 fac 0 = 1
 fac n = n * fac(n-1)
 
-subList 0 _ = []
+subList 0 _      = []
 subList n (x:xs) = x : subList (n-1) xs
 
 --1.4
@@ -53,4 +54,4 @@ atomInsert n e (l:ls) = l : atomInsert (n-1) e ls
 decrement :: Num n => n->n
 decrement n = decrement' n 0
               where decrement' num c | (c+1) == num = c
-                                     | otherwise = decrement' num (c+1)               
+                                     | otherwise   = decrement' num (c+1)               
