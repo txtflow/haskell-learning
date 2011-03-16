@@ -1,5 +1,7 @@
-module Main where
-
+module M234234ain where
+---
+---
+-------------------------
 import System.Environment(getArgs)
 
 interactWith :: (String -> String) -> FilePath -> FilePath -> IO ()
