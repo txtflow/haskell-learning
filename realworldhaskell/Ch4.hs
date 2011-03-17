@@ -1,7 +1,10 @@
 module Main where
 
 import System.Environment(getArgs)
-import Data.Maybe    
+import Data.Maybe
+import Data.List
+import Data.Bits
+import Data.Char
 
 interactWith :: (String -> String) -> FilePath -> FilePath -> IO ()
 interactWith fun inputFile outputFile = do
@@ -47,7 +50,7 @@ safeTail :: [a] -> Maybe [a]
 safeTail []     = Nothing                     
 safeTail (_:xs) = Just xs
 
-safeLast    :: [a] -> Maybe a
+safeLast :: [a] -> Maybe a
 safeLast []     = Nothing
 safeLast [x]    = Just x                  
 sefeLast (_:xs) = safeLast xs
@@ -62,4 +65,27 @@ splitWith :: (a -> Bool) -> [a] -> [[a]]
 splitWith _ []  = []
 splitWith fun l = let (x,xs) = break fun l
                       in x:(splitWith fun xs)
+
+--Data.List.transpose                         
+zipList :: [[a]]->[[a]]                         
+zipList []           = []
+zipList ([]    :xss) = zipList xss
+zipList ((x:xs):xss) = (x:[h | (h:_)<-xss]) : zipList (xs: [t | (_:t)<-xss])
+
+--adler32
+
+glue :: (Data.Bits.Bits t) => (t, t) -> t
+glue (a,b) = (b `shiftL` 16) .|. a
+
+base :: Int
+base = 65521             
+   
+adler32 :: [Char] -> Int
+adler32 xs = glue (foldl checkSum (1,0) xs)
+    where checkSum (a,b) c =
+              let a' = (a + (ord c .&. 0xff)) `mod` base
+                  b' = (a' + b) `mod` base
+              in (a',b')
                  
+
+
