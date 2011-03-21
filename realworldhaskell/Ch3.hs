@@ -87,6 +87,6 @@ intersperse s (x:xs) =  x ++ [s] ++ intersperse s xs
 treeHeight :: (Ord t1, Num t1) => Tree t -> t1
 treeHeight tree = th tree 0
     where
-      th Empty acc        = 0
+      th Empty _          = 0
       th (Node _ l r) acc = max (th l acc+1) (th r acc+1)
              

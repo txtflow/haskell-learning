@@ -5,6 +5,7 @@ import Data.Maybe
 import Data.List
 import Data.Bits
 import Data.Char
+import Data.Char (digitToInt)
 
 interactWith :: (String -> String) -> FilePath -> FilePath -> IO ()
 interactWith fun inputFile outputFile = do
@@ -87,5 +88,16 @@ adler32 xs = glue (foldl checkSum (1,0) xs)
                   b' = (a' + b) `mod` base
               in (a',b')
                  
+--ex1
+asInt :: String -> Int
+asInt str = toInt str 0
+    where toInt []     acc = acc
+          toInt (x:xs) acc = toInt xs (acc*10 + (digitToInt x)) 
 
+asInt_fold     :: String -> Int
+asInt_fold ('-':xs) = (-1) * foldl step 0 xs
+asInt_fold str      = foldl step 0 str
+    where step acc c = acc*10 + (digitToInt c)
+                       
 
+                       
