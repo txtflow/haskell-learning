@@ -95,9 +95,31 @@ asInt str = toInt str 0
           toInt (x:xs) acc = toInt xs (acc*10 + (digitToInt x)) 
 
 asInt_fold     :: String -> Int
-asInt_fold ('-':xs) = (-1) * foldl step 0 xs
-asInt_fold str      = foldl step 0 str
+asInt_fold []                     = 0
+asInt_fold str@(x:xs) | x == '-'   = (-1) * asInt_fold xs
+                      | otherwise = foldl step 0 str              
     where step acc c = acc*10 + (digitToInt c)
-                       
 
                        
+--ex2
+type ErrorMessage = String
+asInt_either :: String -> Either ErrorMessage Int
+asInt_either str | check str = Right (asInt_fold str)
+                 | otherwise = Left "error"
+                 where check []       = True
+                       check ('-':xs) = check xs
+                       check s        = all isDigit s
+                                        
+
+--ex3                                        
+concat_foldr      :: [[a]] -> [a]
+concat_foldr list = foldr (++) [] list
+
+--ex4
+takeWhile_rec      :: (a->Bool) -> [a] -> [a]
+takeWhile_rec _ []           = []
+takeWhile_rec f (x:xs) | f x       = x : takeWhile_rec f xs
+                       | otherwise = []
+
+takeWhile_foldr :: (a->Bool) -> [a] -> [a]
+takeWhile_foldr 
