@@ -121,5 +121,12 @@ takeWhile_rec _ []           = []
 takeWhile_rec f (x:xs) | f x       = x : takeWhile_rec f xs
                        | otherwise = []
 
-takeWhile_foldr :: (a->Bool) -> [a] -> [a]
-takeWhile_foldr 
+takeWhile_foldr        :: (a->Bool) -> [a] -> [a]
+takeWhile_foldr f list = foldr step [] list
+    where step x acc | f x       = x:acc
+                     | otherwise = []
+
+groupBy_fold        :: (a->a->Bool) -> [a] -> [[a]]
+groupBy_fold fun []   = []
+groupBy_fold fun list = foldr step [] list
+    where step x acc = 
