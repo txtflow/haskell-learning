@@ -129,4 +129,9 @@ takeWhile_foldr f list = foldr step [] list
 groupBy_fold        :: (a->a->Bool) -> [a] -> [[a]]
 groupBy_fold fun []   = []
 groupBy_fold fun list = foldr step [] list
-    where step x acc = 
+    where step x acc =
+
+
+
+            
+              

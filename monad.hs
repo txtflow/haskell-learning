@@ -11,9 +11,23 @@ factl n = do
   let n' = n-1
   tell $ "We've taken one way from " ++ show n ++ "\n"
   m <- factl n'
-  tell $ "We've called f" ++ show m ++ "\n"
+  tell $ "We've called f " ++ show m ++ "\n"
   let r = n*m
   tell $ "We've multiplied " ++ show n 
     ++ " and " ++ show m ++ "\n"
   return r
+
+
+
+f :: Integer -> IO ()
+f n = let (a,b) = runWriter(factl n)
+      in do putStrLn $ "Result " ++ show(a)
+            putStrLn b
+        
+        
+
+
+
+
+                      
 

@@ -14,3 +14,5 @@ x2 = do
 result :: (Integer, Integer)
 result = runState x2 10
 
+
+x1 = runState (get >>= \s -> put (s+1) >> return (s^2)) 3
