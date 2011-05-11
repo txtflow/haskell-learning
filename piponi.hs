@@ -16,4 +16,6 @@ g x = (x+2,"call g\n")
 
 compose = f `bind1` g      
 
-compose2 = f `bind2` g      
+compose2 = f `bind2` g
+
+            
