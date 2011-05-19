@@ -44,7 +44,32 @@ instance MonadPlus Parser where
 sat p = do c <- item
            if p c then return c else mzero
 
+sat2 p = [x | x <- item, p x]
+              
+char :: Char -> Parser Char
 char c = sat (c==)
 
+string :: String -> Parser String
 string ""     = return ""
 string (c:cs) = do{char c; string cs; return (c:cs)}
+
+string2 ""     = return ""
+--string2 (c:cs) = char c >>= \_ -> string2 cs >>= \_ -> return (c:cs)
+string2 (c:cs) = char c >> string2 cs >> return (c:cs)
+
+isDigit :: Char -> Bool                 
+isDigit c = c >= '0' && c <= '9'
+
+digit :: Parser Char
+digit = sat isDigit
+
+-- many _ ""     = return ""
+-- many p (c:cs) =
+
+test = char 's' >> char 't' >> char 'r' >> return "str"
+
+letter = sat(\c -> c>='a' && c<='Z')
+       
+p `plus` q = \s -> p s ++ q s
+
+             
