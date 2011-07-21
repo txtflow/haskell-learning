@@ -48,3 +48,4 @@ char c = sat (c==)
 
 string ""     = return ""
 string (c:cs) = do{char c; string cs; return (c:cs)}
+
